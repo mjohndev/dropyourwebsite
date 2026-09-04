@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop Your Website - Free Dofollow Backlink & Website Submission</title>
+    <meta name="description" content="Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dropyourwebsite.com/" />
+    
+    <!-- Graph URL -->
+    <meta property="og:title" content="Drop Your Website - Free Dofollow Backlink & Website Submission" />
+    <meta property="og:description" content="Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dropyourwebsite.com/" />
+    <meta property="og:site_name" content="DropYourWebsite.com" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Drop Your Website - Free Dofollow Backlink & Website Submission" />
+    <meta name="twitter:description" content="Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website." />
+    
+    <!-- Schema URL -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "DropYourWebsite.com",
+            "url": "https://dropyourwebsite.com/",
+            "description": "Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website."
+        }
+    </script>
+    
+    <style>
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #fafafa;
+            color: #1e1e1e;
+            line-height: 1.6;
+            padding: 2rem 1rem 3rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 680px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem 2rem 2rem;
+            transition: padding 0.2s;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.75rem 2rem;
+            }
+            .container {
+                padding: 1.5rem 1rem 1.5rem;
+                border-radius: 24px;
+            }
+        }
+        .brand {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .brand h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0a0a0a;
+            margin-bottom: 0.1rem;
+        }
+        .brand h1 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .brand .tagline {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: #3b3b3b;
+            margin-top: 0.1rem;
+        }
+        .brand .subtext {
+            font-size: 0.95rem;
+            color: #6b6b6b;
+            margin-top: 0.2rem;
+        }
+        .divider {
+            border: 0;
+            height: 1px;
+            background: #eaeaea;
+            margin: 2.2rem 0 2rem;
+        }
+        .form-section {
+            margin-top: 1.8rem;
+        }
+        .form-section .form-heading {
+            font-size: 1.35rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.4rem;
+            letter-spacing: -0.01em;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            color: #2a2a2a;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid #e2e2e2;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #fcfcfc;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: #1a1a1a;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+            background: #ffffff;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            max-height: 160px;
+        }
+        .form-group .char-count {
+            text-align: right;
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.2rem;
+        }
+        .form-group .char-count.warn {
+            color: #c0392b;
+        }
+        .submit-wrap {
+            margin-top: 0.6rem;
+            text-align: center;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #0a0a0a;
+            color: #ffffff;
+            border: none;
+            padding: 0.85rem 2.4rem;
+            border-radius: 60px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+            min-width: 200px;
+            letter-spacing: 0.01em;
+        }
+        .btn-primary:hover {
+            background: #1a1a1a;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-primary .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2.5px solid rgba(255, 255, 255, 0.25);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .form-message {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            display: none;
+        }
+        .form-message.success {
+            display: block;
+            background: #eafaf1;
+            color: #1a6e4a;
+        }
+        .form-message.error {
+            display: block;
+            background: #fdedec;
+            color: #a93226;
+        }
+        .list-header {
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+        .list-header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #0a0a0a;
+        }
+        .list-header .count-badge {
+            font-size: 0.9rem;
+            color: #6b6b6b;
+            margin-top: 0.1rem;
+        }
+        .list-header .count-badge span {
+            font-weight: 600;
+            color: #0a0a0a;
+        }
+        .search-wrap {
+            margin-bottom: 1.6rem;
+            text-align: center;
+        }
+        .search-wrap input {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.6rem 1rem;
+            border: 1.5px solid #e2e2e2;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fcfcfc;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: #1a1a1a;
+        }
+        .search-wrap input:focus {
+            outline: none;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+            background: #ffffff;
+        }
+        .search-wrap input::placeholder {
+            color: #aaa;
+        }
+        .website-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 0.2rem;
+        }
+        .website-card {
+            background: #fbfbfb;
+            border: 1.5px solid #eeeeee;
+            border-radius: 18px;
+            padding: 1.4rem 1.6rem 1.3rem;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .website-card:hover {
+            border-color: #d0d0d0;
+            background: #f9f9f9;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+        }
+        .website-card.featured {
+            border-color: #f5c542;
+            background: #fffcf0;
+        }
+        .website-card .featured-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #8a6d1a;
+            background: #f5e6b0;
+            padding: 0.15rem 0.7rem;
+            border-radius: 40px;
+            margin-bottom: 0.3rem;
+        }
+        .website-card .site-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0a0a0a;
+            word-break: break-word;
+        }
+        .website-card .site-desc {
+            font-size: 0.95rem;
+            color: #3d3d3d;
+            margin: 0.3rem 0 0.7rem;
+            word-break: break-word;
+            line-height: 1.5;
+        }
+        .website-card .site-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem 0.8rem;
+            margin-top: 0.2rem;
+        }
+        .website-card .site-domain {
+            font-size: 0.8rem;
+            color: #888;
+            word-break: break-all;
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 0.15rem 0.7rem;
+            border-radius: 20px;
+        }
+        .website-card .site-stats {
+            font-size: 0.75rem;
+            color: #999;
+        }
+        .btn-visit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: transparent;
+            color: #0a0a0a;
+            border: 1.5px solid #d0d0d0;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+        .btn-visit:hover {
+            background: #0a0a0a;
+            color: #ffffff;
+            border-color: #0a0a0a;
+        }
+        .btn-visit .arrow {
+            transition: transform 0.2s;
+        }
+        .btn-visit:hover .arrow {
+            transform: translateX(3px);
+        }
+        .load-more-wrap {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .btn-load {
+            background: transparent;
+            border: 1.5px solid #d0d0d0;
+            color: #1e1e1e;
+            padding: 0.55rem 2.2rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .btn-load:hover {
+            background: #f0f0f0;
+            border-color: #b0b0b0;
+        }
+        .btn-load:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 2.2rem 0 1rem;
+            color: #6b6b6b;
+        }
+        .empty-state .empty-emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .empty-state .empty-cta {
+            font-weight: 500;
+            color: #1e1e1e;
+        }
+        .loading-state {
+            text-align: center;
+            padding: 2rem 0;
+            color: #888;
+            font-size: 0.95rem;
+        }
+        .loading-state .dot-pulse {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #bbb;
+            border-radius: 50%;
+            margin: 0 3px;
+            animation: pulse 1.2s infinite ease-in-out both;
+        }
+        .loading-state .dot-pulse:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        .loading-state .dot-pulse:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        .loading-state .dot-pulse:nth-child(3) {
+            animation-delay: 0;
+        }
+        @keyframes pulse {
+            0%,
+            80%,
+            100% {
+                transform: scale(0.6);
+                opacity: 0.4;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2.8rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .footer .footer-brand {
+            font-weight: 600;
+            color: #0a0a0a;
+            font-size: 0.95rem;
+        }
+        .footer .footer-tagline {
+            color: #6b6b6b;
+            margin: 0.1rem 0 0.4rem;
+        }
+        .footer .footer-email {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.85rem;
+        }
+        .footer .footer-email:hover {
+            color: #1e1e1e;
+        }
+        .hidden {
+            display: none !important;
+        }
+        @media (max-width: 480px) {
+            .brand h1 {
+                font-size: 1.6rem;
+            }
+            .brand .tagline {
+                font-size: 1rem;
+            }
+            .website-card {
+                padding: 1rem 1rem 1rem;
+            }
+            .website-card .site-meta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .website-card .site-domain {
+                align-self: flex-start;
+            }
+            .btn-visit {
+                align-self: flex-start;
+            }
+            .btn-primary {
+                min-width: 160px;
+                padding: 0.75rem 1.6rem;
+                font-size: 0.95rem;
+            }
+            .container {
+                padding: 1.2rem 0.8rem 1.2rem;
+            }
+        }
+        @media (max-width: 380px) {
+            .brand h1 {
+                font-size: 1.3rem;
+            }
+            .btn-primary {
+                min-width: 140px;
+                padding: 0.65rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+
+        <!-- HEADER -->
+        <header class="brand">
+            <h1><a href="/">DropYourWebsite.com</a></h1>
+            <p class="tagline">Free Dofollow Backlink &amp; Website Submission</p>
+            <p class="subtext">Drop Your Website &amp; Get Discovered</p>
+        </header>
+
+        <!-- SUBMISSION FORM -->
+        <section class="form-section" id="form-section">
+            <h2 class="form-heading">Drop Your Website</h2>
+            <form id="submitForm" novalidate>
+                <div class="form-group">
+                    <label for="siteName">Website Name</label>
+                    <input type="text" id="siteName" placeholder="Enter your website name" required maxlength="100" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <label for="siteDesc">Website Description</label>
+                    <textarea id="siteDesc" placeholder="Tell us what your website is about" required maxlength="300" rows="3"></textarea>
+                    <div class="char-count" id="charCount">0 / 300</div>
+                </div>
+                <div class="form-group">
+                    <label for="siteUrl">Website Link</label>
+                    <input type="url" id="siteUrl" placeholder="https://example.com" required autocomplete="off" />
+                </div>
+                <div class="submit-wrap">
+                    <button type="submit" class="btn-primary" id="submitBtn">Drop Your Website</button>
+                </div>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- LIST HEADER -->
+        <div class="list-header">
+            <h2>Dropped Websites</h2>
+            <p class="count-badge"><span id="totalCount">0</span> websites dropped</p>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-wrap" id="searchWrap">
+            <input type="text" id="searchInput" placeholder="Search websites..." autocomplete="off" />
+        </div>
+
+        <!-- WEBSITE LIST -->
+        <div id="websiteList" class="website-list"></div>
+
+        <!-- LOAD MORE -->
+        <div class="load-more-wrap" id="loadMoreWrap">
+            <button class="btn-load" id="loadMoreBtn">Load More ↓</button>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-brand">DropYourWebsite.com</div>
+            <div class="footer-tagline">Drop Your Website &amp; Get Discovered</div>
+            <a href="mailto:admin@dropyourwebsite.com" class="footer-email">admin@dropyourwebsite.com</a>
+        </footer>
+
+    </div>
+
+    <script>
+        // ================================================================
+        // CONFIGURATION – API URL UPDATED FOR YOUR BACKEND
+        // ================================================================
+        const CONFIG = {
+            siteName: "DropYourWebsite.com",
+            apiUrl: "https://script.google.com/macros/s/AKfycbxjHEaBUJx5A6qDgKo8KLjb360ewWYkwpXviKK9bGEXIFJUCUfKOMq4_CA5tlvdb_ij/exec",
+            maxDescriptionLength: 300,
+            perPage: 20,
+            linkRel: "noopener noreferrer"
+        };
+
+        // ================================================================
+        // STATE
+        // ================================================================
+        let allWebsites = [];
+        let filteredWebsites = [];
+        let displayedCount = 0;
+        let isLoading = false;
+        let hasMore = true;
+        let isSubmitting = false;
+
+        // ================================================================
+        // DOM REFS
+        // ================================================================
+        const form = document.getElementById('submitForm');
+        const siteName = document.getElementById('siteName');
+        const siteDesc = document.getElementById('siteDesc');
+        const siteUrl = document.getElementById('siteUrl');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const charCount = document.getElementById('charCount');
+        const websiteList = document.getElementById('websiteList');
+        const totalCount = document.getElementById('totalCount');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loadMoreWrap = document.getElementById('loadMoreWrap');
+        const searchInput = document.getElementById('searchInput');
+
+        // ================================================================
+        // HELPERS
+        // ================================================================
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        function isValidUrl(string) {
+            try {
+                const url = new URL(string);
+                return url.protocol === 'http:' || url.protocol === 'https:';
+            } catch (_) { return false; }
+        }
+
+        function getDomain(url) {
+            try {
+                const u = new URL(url);
+                return u.hostname;
+            } catch (_) { return url; }
+        }
+
+        function showMessage(msg, type) {
+            formMessage.textContent = msg;
+            formMessage.className = 'form-message ' + type;
+        }
+
+        function hideMessage() {
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+        }
+
+        function setLoading(loading) {
+            if (loading) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner"></span> Dropping...';
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Drop Your Website';
+            }
+        }
+
+        // ================================================================
+        // API CALLS
+        // ================================================================
+        async function fetchWebsites(limit, offset) {
+            const url = CONFIG.apiUrl +
+                '?action=fetch&limit=' + encodeURIComponent(limit) +
+                '&offset=' + encodeURIComponent(offset);
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network error');
+            return await response.json();
+        }
+
+        async function submitWebsite(name, description, url) {
+            const payload = { action: 'submit', name, description, url };
+            const response = await fetch(CONFIG.apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('Network error');
+            return await response.json();
+        }
+
+        async function trackClick(id) {
+            try {
+                await fetch(CONFIG.apiUrl + '?action=click&id=' + encodeURIComponent(id));
+            } catch (_) {}
+        }
+
+        // ================================================================
+        // LOAD WEBSITES
+        // ================================================================
+        async function loadWebsites(reset = false) {
+            if (isLoading) return;
+            isLoading = true;
+
+            if (reset) {
+                allWebsites = [];
+                filteredWebsites = [];
+                displayedCount = 0;
+                hasMore = true;
+                websiteList.innerHTML = '';
+                loadMoreBtn.disabled = false;
+                loadMoreBtn.textContent = 'Load More ↓';
+            }
+
+            if (allWebsites.length === 0) {
+                websiteList.innerHTML = `
+                        <div class="loading-state">
+                            Loading dropped websites
+                            <span class="dot-pulse"></span>
+                            <span class="dot-pulse"></span>
+                            <span class="dot-pulse"></span>
+                        </div>
+                    `;
+            }
+
+            try {
+                const offset = allWebsites.length;
+                const data = await fetchWebsites(CONFIG.perPage, offset);
+
+                if (data.status === 'success') {
+                    const newSites = data.websites || [];
+                    if (newSites.length === 0) {
+                        hasMore = false;
+                        loadMoreBtn.disabled = true;
+                        loadMoreBtn.textContent = 'No more websites';
+                    } else {
+                        allWebsites = allWebsites.concat(newSites);
+                        if (newSites.length < CONFIG.perPage) {
+                            hasMore = false;
+                            loadMoreBtn.disabled = true;
+                            loadMoreBtn.textContent = 'All loaded';
+                        } else {
+                            hasMore = true;
+                            loadMoreBtn.disabled = false;
+                            loadMoreBtn.textContent = 'Load More ↓';
+                        }
+                    }
+                    totalCount.textContent = data.total || allWebsites.length;
+                    applySearch();
+                    renderWebsites();
+                } else {
+                    throw new Error(data.message || 'Failed to load');
+                }
+            } catch (err) {
+                console.error('Load error:', err);
+                if (allWebsites.length === 0) {
+                    websiteList.innerHTML = `
+                            <div class="empty-state">
+                                <span class="empty-emoji">⚠️</span>
+                                Something went wrong. Please try again later.
+                            </div>
+                        `;
+                }
+                loadMoreBtn.disabled = false;
+                loadMoreBtn.textContent = 'Retry ↓';
+            }
+            isLoading = false;
+        }
+
+        // ================================================================
+        // SEARCH
+        // ================================================================
+        function applySearch() {
+            const term = searchInput.value.trim().toLowerCase();
+            if (!term) {
+                filteredWebsites = allWebsites.slice();
+            } else {
+                filteredWebsites = allWebsites.filter(function(site) {
+                    const name = (site.name || '').toLowerCase();
+                    const desc = (site.description || '').toLowerCase();
+                    const url = (site.url || '').toLowerCase();
+                    return name.includes(term) || desc.includes(term) || url.includes(term);
+                });
+            }
+            displayedCount = 0;
+            renderWebsites();
+            if (term) {
+                loadMoreWrap.classList.add('hidden');
+            } else {
+                loadMoreWrap.classList.remove('hidden');
+                if (!hasMore) {
+                    loadMoreBtn.textContent = 'All loaded';
+                    loadMoreBtn.disabled = true;
+                } else {
+                    loadMoreBtn.textContent = 'Load More ↓';
+                    loadMoreBtn.disabled = false;
+                }
+            }
+        }
+
+        searchInput.addEventListener('input', applySearch);
+
+        // ================================================================
+        // RENDER
+        // ================================================================
+        function buildCard(site) {
+            const name = escapeHtml(site.name || 'Untitled');
+            const desc = escapeHtml(site.description || '');
+            const url = site.url || '#';
+            const domain = getDomain(url);
+            const featured = site.featured === true || site.featured === 'true';
+            const clicks = site.clicks || 0;
+            const featuredBadge = featured ? '<div class="featured-badge">⭐ Featured</div>' : '';
+
+            return `
+                    <div class="website-card ${featured ? 'featured' : ''}">
+                        ${featuredBadge}
+                        <div class="site-name">${name}</div>
+                        ${desc ? '<div class="site-desc">' + desc + '</div>' : ''}
+                        <div class="site-meta">
+                            <span class="site-domain">${escapeHtml(domain)}</span>
+                            <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;">
+                                ${clicks > 0 ? '<span class="site-stats">' + clicks + ' visits</span>' : ''}
+                                <a href="${escapeHtml(url)}" class="btn-visit" target="_blank" rel="${CONFIG.linkRel}" data-id="${escapeHtml(site.id || '')}">
+                                    Visit Website <span class="arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+        }
+
+        function renderWebsites() {
+            const slice = filteredWebsites.slice(0, displayedCount + CONFIG.perPage);
+
+            if (filteredWebsites.length === 0) {
+                websiteList.innerHTML = `
+                        <div class="empty-state">
+                            <span class="empty-emoji">🌐</span>
+                            No websites found.
+                            <span class="empty-cta">Be the first one. 👇</span>
+                        </div>
+                    `;
+                loadMoreWrap.classList.add('hidden');
+                return;
+            }
+
+            if (displayedCount === 0) {
+                websiteList.innerHTML = '';
+            }
+
+            const newSites = slice.slice(displayedCount);
+            let html = '';
+            for (let i = 0; i < newSites.length; i++) {
+                html += buildCard(newSites[i]);
+            }
+
+            if (displayedCount === 0) {
+                websiteList.innerHTML = html;
+            } else {
+                websiteList.insertAdjacentHTML('beforeend', html);
+            }
+
+            displayedCount = slice.length;
+
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                loadMoreWrap.classList.add('hidden');
+            } else {
+                loadMoreWrap.classList.remove('hidden');
+                if (!hasMore || displayedCount >= allWebsites.length) {
+                    loadMoreBtn.textContent = 'All loaded';
+                    loadMoreBtn.disabled = true;
+                } else {
+                    loadMoreBtn.textContent = 'Load More ↓';
+                    loadMoreBtn.disabled = false;
+                }
+            }
+        }
+
+        // ================================================================
+        // CLICK TRACKING
+        // ================================================================
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('.btn-visit');
+            if (!link) return;
+            const id = link.getAttribute('data-id');
+            if (id) trackClick(id);
+        });
+
+        // ================================================================
+        // LOAD MORE
+        // ================================================================
+        loadMoreBtn.addEventListener('click', function() {
+            if (isLoading || !hasMore) return;
+            if (filteredWebsites.length < allWebsites.length) {
+                renderWebsites();
+            } else {
+                loadWebsites(false);
+            }
+        });
+
+        // ================================================================
+        // CHAR COUNT
+        // ================================================================
+        siteDesc.addEventListener('input', function() {
+            const len = this.value.length;
+            charCount.textContent = len + ' / ' + CONFIG.maxDescriptionLength;
+            charCount.classList.toggle('warn', len > CONFIG.maxDescriptionLength * 0.85);
+        });
+
+        // ================================================================
+        // SUBMIT
+        // ================================================================
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (isSubmitting) return;
+
+            const name = siteName.value.trim();
+            const description = siteDesc.value.trim();
+            const url = siteUrl.value.trim();
+
+            if (!name) { showMessage('Please enter a website name.', 'error'); siteName.focus(); return; }
+            if (!description) { showMessage('Please enter a description.', 'error'); siteDesc.focus(); return; }
+            if (description.length > CONFIG.maxDescriptionLength) {
+                showMessage('Description too long. Max ' + CONFIG.maxDescriptionLength + ' chars.', 'error');
+                siteDesc.focus();
+                return;
+            }
+            if (!url) { showMessage('Please enter a URL.', 'error'); siteUrl.focus(); return; }
+            if (!isValidUrl(url)) {
+                showMessage('Please enter a valid URL (http:// or https://).', 'error');
+                siteUrl.focus();
+                return;
+            }
+
+            // Check duplicate
+            if (allWebsites.some(function(s) { return s.url && s.url.toLowerCase() === url.toLowerCase(); })) {
+                showMessage('This website has already been dropped.', 'error');
+                return;
+            }
+
+            isSubmitting = true;
+            setLoading(true);
+            hideMessage();
+
+            try {
+                const result = await submitWebsite(name, description, url);
+                if (result.status === 'success') {
+                    showMessage('Your website has been dropped! 🎉', 'success');
+                    form.reset();
+                    charCount.textContent = '0 / ' + CONFIG.maxDescriptionLength;
+                    // Reload list to show instantly and update count
+                    setTimeout(function() {
+                        allWebsites = [];
+                        filteredWebsites = [];
+                        displayedCount = 0;
+                        hasMore = true;
+                        loadWebsites(true);
+                    }, 500);
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (err) {
+                showMessage(err.message || 'Something went wrong. Try again later.', 'error');
+            }
+
+            isSubmitting = false;
+            setLoading(false);
+        });
+
+        // ================================================================
+        // INIT
+        // ================================================================
+        loadWebsites(true);
+        console.log('🚀 DropYourWebsite.com loaded.');
+        console.log('🔗 API URL:', CONFIG.apiUrl);
+    </script>
+</body>
+</html>
