@@ -572,7 +572,9 @@
             apiUrl: "https://script.google.com/macros/s/AKfycby_vEo8NZIOYJeVUutfEuZTtS1Zu-rql5cLthGQksVhXUrBeU4PaToxNDaDT1A7q-1T/exec", // <-- REPLACE THIS
             maxDescriptionLength: 300,
             perPage: 20,
-            linkRel: "noopener noreferrer"
+            linkRel: "noopener noreferrer",
+            // Cache expiration in minutes
+            cacheExpirationMinutes: 2
         };
 
         // ================================================================
@@ -584,6 +586,7 @@
         let isLoading = false;
         let hasMore = true;
         let isSubmitting = false;
+        let isCacheValid = false;
 
         // ================================================================
         // DOM REFS
@@ -600,6 +603,43 @@
         const loadMoreBtn = document.getElementById('loadMoreBtn');
         const loadMoreWrap = document.getElementById('loadMoreWrap');
         const searchInput = document.getElementById('searchInput');
+
+        // ================================================================
+        // CACHE HELPERS
+        // ================================================================
+        function saveCache(data, total) {
+            try {
+                const cache = {
+                    timestamp: Date.now(),
+                    data: data,
+                    total: total
+                };
+                localStorage.setItem('dropwebsite_cache', JSON.stringify(cache));
+            } catch (e) {
+                // ignore storage errors
+            }
+        }
+
+        function loadCache() {
+            try {
+                const raw = localStorage.getItem('dropwebsite_cache');
+                if (!raw) return null;
+                const cache = JSON.parse(raw);
+                const now = Date.now();
+                const expire = CONFIG.cacheExpirationMinutes * 60 * 1000;
+                if (now - cache.timestamp > expire) {
+                    localStorage.removeItem('dropwebsite_cache');
+                    return null;
+                }
+                return cache;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function clearCache() {
+            localStorage.removeItem('dropwebsite_cache');
+        }
 
         // ================================================================
         // HELPERS
@@ -664,7 +704,6 @@
             const response = await fetch(CONFIG.apiUrl, {
                 method: 'POST',
                 headers: {
-                    // Use text/plain to avoid CORS preflight (OPTIONS) request
                     'Content-Type': 'text/plain;charset=utf-8'
                 },
                 body: JSON.stringify(payload)
@@ -680,7 +719,7 @@
         }
 
         // ================================================================
-        // LOAD WEBSITES
+        // LOAD WEBSITES (with cache)
         // ================================================================
         async function loadWebsites(reset = false) {
             if (isLoading) return;
@@ -694,8 +733,34 @@
                 websiteList.innerHTML = '';
                 loadMoreBtn.disabled = false;
                 loadMoreBtn.textContent = 'Load More ↓';
+                clearCache();
             }
 
+            // Try cache first (unless reset is true)
+            if (!reset) {
+                const cached = loadCache();
+                if (cached) {
+                    allWebsites = cached.data;
+                    filteredWebsites = allWebsites.slice();
+                    totalCount.textContent = cached.total;
+                    displayedCount = 0;
+                    renderWebsites();
+                    // Determine if more pages exist
+                    if (allWebsites.length >= cached.total) {
+                        hasMore = false;
+                        loadMoreBtn.disabled = true;
+                        loadMoreBtn.textContent = 'All loaded';
+                    } else {
+                        hasMore = true;
+                        loadMoreBtn.disabled = false;
+                        loadMoreBtn.textContent = 'Load More ↓';
+                    }
+                    isLoading = false;
+                    return;
+                }
+            }
+
+            // No cache – fetch from server
             if (allWebsites.length === 0) {
                 websiteList.innerHTML = `
                         <div class="loading-state">
@@ -730,6 +795,8 @@
                         }
                     }
                     totalCount.textContent = data.total || allWebsites.length;
+                    // Save cache
+                    saveCache(allWebsites, data.total || allWebsites.length);
                     applySearch();
                     renderWebsites();
                 } else {
@@ -918,7 +985,7 @@
                 return;
             }
 
-            // Check duplicate
+            // Check duplicate (from local data)
             if (allWebsites.some(function(s) { return s.url && s.url.toLowerCase() === url.toLowerCase(); })) {
                 showMessage('This website has already been dropped.', 'error');
                 return;
@@ -929,14 +996,13 @@
             hideMessage();
 
             try {
-                console.log('Submitting:', { name, description, url });
                 const result = await submitWebsite(name, description, url);
-                console.log('Response:', result);
                 if (result.status === 'success') {
                     showMessage('Your website has been dropped! 🎉', 'success');
                     form.reset();
                     charCount.textContent = '0 / ' + CONFIG.maxDescriptionLength;
-                    // Reload list to show instantly
+                    // Clear cache and reload to show new entry
+                    clearCache();
                     setTimeout(function() {
                         allWebsites = [];
                         filteredWebsites = [];
