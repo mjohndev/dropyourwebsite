@@ -6,22 +6,15 @@
     <title>Drop Your Website - Free Dofollow Backlink & Website Submission</title>
     <meta name="description" content="Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website." />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>" />
-    
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://dropyourwebsite.com/" />
-    
-    <!-- Graph URL -->
     <meta property="og:title" content="Drop Your Website - Free Dofollow Backlink & Website Submission" />
     <meta property="og:description" content="Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dropyourwebsite.com/" />
     <meta property="og:site_name" content="DropYourWebsite.com" />
-    
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Drop Your Website - Free Dofollow Backlink & Website Submission" />
     <meta name="twitter:description" content="Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website." />
-    
-    <!-- Schema URL -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -31,11 +24,10 @@
             "description": "Submit your website for free and get listed in our growing website directory. Get discovered by new visitors and receive a free dofollow backlink to your website."
         }
     </script>
-    
     <style>
-        /* ============================================================
-           RESET & BASE
-           ============================================================ */
+        /* ============================== */
+        /* RESET & BASE (same as before) */
+        /* ============================== */
         *,
         *::before,
         *::after {
@@ -573,11 +565,11 @@
 
     <script>
         // ================================================================
-        // CONFIGURATION – API URL UPDATED FOR YOUR BACKEND
+        // CONFIGURATION – UPDATE WITH YOUR NEW APPS SCRIPT URL
         // ================================================================
         const CONFIG = {
             siteName: "DropYourWebsite.com",
-            apiUrl: "https://script.google.com/macros/s/AKfycbxFXOF5yqJ6ojSf8cV-z24Q7ttaRi1whpVPQqM5tjoPJjq1v5kxFRzyqQU1ra5vY4tk/exec",
+            apiUrl: "https://script.google.com/macros/s/AKfycby_vEo8NZIOYJeVUutfEuZTtS1Zu-rql5cLthGQksVhXUrBeU4PaToxNDaDT1A7q-1T/exec", // <-- REPLACE THIS
             maxDescriptionLength: 300,
             perPage: 20,
             linkRel: "noopener noreferrer"
@@ -931,12 +923,14 @@
             hideMessage();
 
             try {
+                console.log('Submitting:', { name, description, url });
                 const result = await submitWebsite(name, description, url);
+                console.log('Response:', result);
                 if (result.status === 'success') {
                     showMessage('Your website has been dropped! 🎉', 'success');
                     form.reset();
                     charCount.textContent = '0 / ' + CONFIG.maxDescriptionLength;
-                    // Reload list to show instantly and update count
+                    // Reload list to show instantly
                     setTimeout(function() {
                         allWebsites = [];
                         filteredWebsites = [];
@@ -948,6 +942,7 @@
                     throw new Error(result.message || 'Submission failed');
                 }
             } catch (err) {
+                console.error('Submit error:', err);
                 showMessage(err.message || 'Something went wrong. Try again later.', 'error');
             }
 
