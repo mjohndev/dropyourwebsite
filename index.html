@@ -26,7 +26,7 @@
     </script>
     <style>
         /* ============================== */
-        /* RESET & BASE (same as before) */
+        /* RESET & BASE */
         /* ============================== */
         *,
         *::before,
@@ -565,7 +565,7 @@
 
     <script>
         // ================================================================
-        // CONFIGURATION – UPDATE WITH YOUR NEW APPS SCRIPT URL
+        // CONFIGURATION – UPDATE YOUR APPS SCRIPT URL HERE
         // ================================================================
         const CONFIG = {
             siteName: "DropYourWebsite.com",
@@ -656,11 +656,17 @@
             return await response.json();
         }
 
+        // ================================================================
+        // UPDATED submitWebsite – uses text/plain to avoid CORS preflight
+        // ================================================================
         async function submitWebsite(name, description, url) {
             const payload = { action: 'submit', name, description, url };
             const response = await fetch(CONFIG.apiUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    // Use text/plain to avoid CORS preflight (OPTIONS) request
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
                 body: JSON.stringify(payload)
             });
             if (!response.ok) throw new Error('Network error');
