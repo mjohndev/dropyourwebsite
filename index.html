@@ -26,7 +26,7 @@
     </script>
     <style>
         /* ============================== */
-        /* RESET & BASE */
+        /* RESET & BASE – fully responsive */
         /* ============================== */
         *,
         *::before,
@@ -283,6 +283,9 @@
         .website-card.featured {
             border-color: #f5c542;
             background: #fffcf0;
+        }
+        .website-card.featured:hover {
+            border-color: #e8b830;
         }
         .website-card .featured-badge {
             display: inline-block;
@@ -573,7 +576,6 @@
             maxDescriptionLength: 300,
             perPage: 20,
             linkRel: "noopener noreferrer",
-            // Cache expiration in minutes
             cacheExpirationMinutes: 2
         };
 
@@ -586,7 +588,6 @@
         let isLoading = false;
         let hasMore = true;
         let isSubmitting = false;
-        let isCacheValid = false;
 
         // ================================================================
         // DOM REFS
@@ -605,28 +606,46 @@
         const searchInput = document.getElementById('searchInput');
 
         // ================================================================
-        // CACHE HELPERS
+        // SORT FUNCTION – featured first, then by submissionDate (newest first)
+        // ================================================================
+        function sortByFeaturedAndDate(websites) {
+            return websites.sort(function(a, b) {
+                // First, compare featured status (true > false)
+                var featuredA = a.featured === true || a.featured === 'true';
+                var featuredB = b.featured === true || b.featured === 'true';
+                if (featuredA && !featuredB) return -1;
+                if (!featuredA && featuredB) return 1;
+                // If same featured status, sort by date (newest first)
+                var dateA = a.submissionDate || 0;
+                var dateB = b.submissionDate || 0;
+                if (typeof dateA === 'string') dateA = new Date(dateA).getTime();
+                if (typeof dateB === 'string') dateB = new Date(dateB).getTime();
+                return dateB - dateA;
+            });
+        }
+
+        // ================================================================
+        // CACHE HELPERS (with sorting)
         // ================================================================
         function saveCache(data, total) {
             try {
-                const cache = {
+                var sorted = sortByFeaturedAndDate(data.slice());
+                var cache = {
                     timestamp: Date.now(),
-                    data: data,
+                    data: sorted,
                     total: total
                 };
                 localStorage.setItem('dropwebsite_cache', JSON.stringify(cache));
-            } catch (e) {
-                // ignore storage errors
-            }
+            } catch (e) { /* ignore */ }
         }
 
         function loadCache() {
             try {
-                const raw = localStorage.getItem('dropwebsite_cache');
+                var raw = localStorage.getItem('dropwebsite_cache');
                 if (!raw) return null;
-                const cache = JSON.parse(raw);
-                const now = Date.now();
-                const expire = CONFIG.cacheExpirationMinutes * 60 * 1000;
+                var cache = JSON.parse(raw);
+                var now = Date.now();
+                var expire = CONFIG.cacheExpirationMinutes * 60 * 1000;
                 if (now - cache.timestamp > expire) {
                     localStorage.removeItem('dropwebsite_cache');
                     return null;
@@ -646,20 +665,20 @@
         // ================================================================
         function escapeHtml(text) {
             if (!text) return '';
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            var map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
             return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
         }
 
         function isValidUrl(string) {
             try {
-                const url = new URL(string);
+                var url = new URL(string);
                 return url.protocol === 'http:' || url.protocol === 'https:';
             } catch (_) { return false; }
         }
 
         function getDomain(url) {
             try {
-                const u = new URL(url);
+                var u = new URL(url);
                 return u.hostname;
             } catch (_) { return url; }
         }
@@ -688,20 +707,17 @@
         // API CALLS
         // ================================================================
         async function fetchWebsites(limit, offset) {
-            const url = CONFIG.apiUrl +
+            var url = CONFIG.apiUrl +
                 '?action=fetch&limit=' + encodeURIComponent(limit) +
                 '&offset=' + encodeURIComponent(offset);
-            const response = await fetch(url);
+            var response = await fetch(url);
             if (!response.ok) throw new Error('Network error');
             return await response.json();
         }
 
-        // ================================================================
-        // UPDATED submitWebsite – uses text/plain to avoid CORS preflight
-        // ================================================================
         async function submitWebsite(name, description, url) {
-            const payload = { action: 'submit', name, description, url };
-            const response = await fetch(CONFIG.apiUrl, {
+            var payload = { action: 'submit', name: name, description: description, url: url };
+            var response = await fetch(CONFIG.apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'text/plain;charset=utf-8'
@@ -719,9 +735,9 @@
         }
 
         // ================================================================
-        // LOAD WEBSITES (with cache)
+        // LOAD WEBSITES (with sorting & cache)
         // ================================================================
-        async function loadWebsites(reset = false) {
+        async function loadWebsites(reset) {
             if (isLoading) return;
             isLoading = true;
 
@@ -736,16 +752,16 @@
                 clearCache();
             }
 
-            // Try cache first (unless reset is true)
             if (!reset) {
-                const cached = loadCache();
+                var cached = loadCache();
                 if (cached) {
                     allWebsites = cached.data;
+                    // Ensure the order is correct (cache already sorted)
+                    allWebsites = sortByFeaturedAndDate(allWebsites);
                     filteredWebsites = allWebsites.slice();
                     totalCount.textContent = cached.total;
                     displayedCount = 0;
                     renderWebsites();
-                    // Determine if more pages exist
                     if (allWebsites.length >= cached.total) {
                         hasMore = false;
                         loadMoreBtn.disabled = true;
@@ -760,7 +776,6 @@
                 }
             }
 
-            // No cache – fetch from server
             if (allWebsites.length === 0) {
                 websiteList.innerHTML = `
                         <div class="loading-state">
@@ -773,29 +788,29 @@
             }
 
             try {
-                const offset = allWebsites.length;
-                const data = await fetchWebsites(CONFIG.perPage, offset);
+                var offset = allWebsites.length;
+                var data = await fetchWebsites(CONFIG.perPage, offset);
 
                 if (data.status === 'success') {
-                    const newSites = data.websites || [];
+                    var newSites = data.websites || [];
                     if (newSites.length === 0) {
                         hasMore = false;
                         loadMoreBtn.disabled = true;
                         loadMoreBtn.textContent = 'No more websites';
                     } else {
                         allWebsites = allWebsites.concat(newSites);
-                        if (newSites.length < CONFIG.perPage) {
-                            hasMore = false;
-                            loadMoreBtn.disabled = true;
-                            loadMoreBtn.textContent = 'All loaded';
-                        } else {
+                        allWebsites = sortByFeaturedAndDate(allWebsites);
+                        if (allWebsites.length < data.total) {
                             hasMore = true;
                             loadMoreBtn.disabled = false;
                             loadMoreBtn.textContent = 'Load More ↓';
+                        } else {
+                            hasMore = false;
+                            loadMoreBtn.disabled = true;
+                            loadMoreBtn.textContent = 'All loaded';
                         }
                     }
                     totalCount.textContent = data.total || allWebsites.length;
-                    // Save cache
                     saveCache(allWebsites, data.total || allWebsites.length);
                     applySearch();
                     renderWebsites();
@@ -819,20 +834,21 @@
         }
 
         // ================================================================
-        // SEARCH
+        // SEARCH (with sorting)
         // ================================================================
         function applySearch() {
-            const term = searchInput.value.trim().toLowerCase();
+            var term = searchInput.value.trim().toLowerCase();
             if (!term) {
                 filteredWebsites = allWebsites.slice();
             } else {
                 filteredWebsites = allWebsites.filter(function(site) {
-                    const name = (site.name || '').toLowerCase();
-                    const desc = (site.description || '').toLowerCase();
-                    const url = (site.url || '').toLowerCase();
+                    var name = (site.name || '').toLowerCase();
+                    var desc = (site.description || '').toLowerCase();
+                    var url = (site.url || '').toLowerCase();
                     return name.includes(term) || desc.includes(term) || url.includes(term);
                 });
             }
+            filteredWebsites = sortByFeaturedAndDate(filteredWebsites);
             displayedCount = 0;
             renderWebsites();
             if (term) {
@@ -855,13 +871,13 @@
         // RENDER
         // ================================================================
         function buildCard(site) {
-            const name = escapeHtml(site.name || 'Untitled');
-            const desc = escapeHtml(site.description || '');
-            const url = site.url || '#';
-            const domain = getDomain(url);
-            const featured = site.featured === true || site.featured === 'true';
-            const clicks = site.clicks || 0;
-            const featuredBadge = featured ? '<div class="featured-badge">⭐ Featured</div>' : '';
+            var name = escapeHtml(site.name || 'Untitled');
+            var desc = escapeHtml(site.description || '');
+            var url = site.url || '#';
+            var domain = getDomain(url);
+            var featured = site.featured === true || site.featured === 'true';
+            var clicks = site.clicks || 0;
+            var featuredBadge = featured ? '<div class="featured-badge">⭐ Featured</div>' : '';
 
             return `
                     <div class="website-card ${featured ? 'featured' : ''}">
@@ -882,9 +898,10 @@
         }
 
         function renderWebsites() {
-            const slice = filteredWebsites.slice(0, displayedCount + CONFIG.perPage);
+            var slice = filteredWebsites.slice(0, displayedCount + CONFIG.perPage);
 
             if (filteredWebsites.length === 0) {
+                // Empty state with globe emoji
                 websiteList.innerHTML = `
                         <div class="empty-state">
                             <span class="empty-emoji">🌐</span>
@@ -900,9 +917,9 @@
                 websiteList.innerHTML = '';
             }
 
-            const newSites = slice.slice(displayedCount);
-            let html = '';
-            for (let i = 0; i < newSites.length; i++) {
+            var newSites = slice.slice(displayedCount);
+            var html = '';
+            for (var i = 0; i < newSites.length; i++) {
                 html += buildCard(newSites[i]);
             }
 
@@ -914,7 +931,7 @@
 
             displayedCount = slice.length;
 
-            const searchTerm = searchInput.value.trim();
+            var searchTerm = searchInput.value.trim();
             if (searchTerm) {
                 loadMoreWrap.classList.add('hidden');
             } else {
@@ -933,9 +950,9 @@
         // CLICK TRACKING
         // ================================================================
         document.addEventListener('click', function(e) {
-            const link = e.target.closest('.btn-visit');
+            var link = e.target.closest('.btn-visit');
             if (!link) return;
-            const id = link.getAttribute('data-id');
+            var id = link.getAttribute('data-id');
             if (id) trackClick(id);
         });
 
@@ -955,7 +972,7 @@
         // CHAR COUNT
         // ================================================================
         siteDesc.addEventListener('input', function() {
-            const len = this.value.length;
+            var len = this.value.length;
             charCount.textContent = len + ' / ' + CONFIG.maxDescriptionLength;
             charCount.classList.toggle('warn', len > CONFIG.maxDescriptionLength * 0.85);
         });
@@ -967,9 +984,9 @@
             e.preventDefault();
             if (isSubmitting) return;
 
-            const name = siteName.value.trim();
-            const description = siteDesc.value.trim();
-            const url = siteUrl.value.trim();
+            var name = siteName.value.trim();
+            var description = siteDesc.value.trim();
+            var url = siteUrl.value.trim();
 
             if (!name) { showMessage('Please enter a website name.', 'error'); siteName.focus(); return; }
             if (!description) { showMessage('Please enter a description.', 'error'); siteDesc.focus(); return; }
@@ -985,7 +1002,6 @@
                 return;
             }
 
-            // Check duplicate (from local data)
             if (allWebsites.some(function(s) { return s.url && s.url.toLowerCase() === url.toLowerCase(); })) {
                 showMessage('This website has already been dropped.', 'error');
                 return;
@@ -996,13 +1012,13 @@
             hideMessage();
 
             try {
-                const result = await submitWebsite(name, description, url);
+                var result = await submitWebsite(name, description, url);
                 if (result.status === 'success') {
                     showMessage('Your website has been dropped! 🎉', 'success');
                     form.reset();
                     charCount.textContent = '0 / ' + CONFIG.maxDescriptionLength;
-                    // Clear cache and reload to show new entry
                     clearCache();
+                    // Reload to get the new entry and correct order
                     setTimeout(function() {
                         allWebsites = [];
                         filteredWebsites = [];
@@ -1026,7 +1042,7 @@
         // INIT
         // ================================================================
         loadWebsites(true);
-        console.log('🚀 DropYourWebsite.com loaded.');
+        console.log('🚀 DropYourWebsite.com loaded (featured on top).');
         console.log('🔗 API URL:', CONFIG.apiUrl);
     </script>
 </body>
